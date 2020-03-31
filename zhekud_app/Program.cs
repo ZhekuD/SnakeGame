@@ -5,7 +5,7 @@ namespace zhekud_app
     class SnakeGame
     {
         static int counter = 0;
-        static readonly int max_counter = 300;
+        static readonly int max_counter = 3000;
         static bool gameStatus = true;
         static int snakeLength = 2;
         static int direction = 3; // 1 - up, 2 - down, 3 - right, 4 - left
@@ -44,38 +44,40 @@ namespace zhekud_app
         }   
 
         static void DrawGame()
-        {
-            int rows = field.GetUpperBound(0) + 1;
-            int columns = field.Length / rows;
-            string grid = "";
-
-            for (int i = 0; i < rows; i++)
+        {   
+            if (counter == max_counter)
             {
-                for (int j = 0; j < columns; j++)
-                {
-                    grid += "\u253C\u2500\u2500\u2500";
-                }
-                grid += "\n";
-                for (int j = 0; j < columns; j++)
-                {
-                    if (field[i, j] > 0)
-                    {
-                        grid += "\u2502 \u25A0 ";
-                    }
-                    else if (field[i, j] == -1)
-                    {
-                        grid += "\u2502 X ";
-                    }
-                    else
-                    {
-                        grid += "\u2502   ";
-                    }
-                }
-                grid += "\n";
-            }
-            Console.WriteLine(grid);
-            Console.WriteLine(snakeLength - 1);
+                int rows = field.GetUpperBound(0) + 1;
+                int columns = field.Length / rows;
+                string grid = "";
 
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        grid += "\u253C\u2500\u2500\u2500";
+                    }
+                    grid += "\n";
+                    for (int j = 0; j < columns; j++)
+                    {
+                        if (field[i, j] > 0)
+                        {
+                            grid += "\u2502 \u25A0 ";
+                        }
+                        else if (field[i, j] == -1)
+                        {
+                            grid += "\u2502 X ";
+                        }
+                        else
+                        {
+                            grid += "\u2502   ";
+                        }
+                    }
+                    grid += "\n";
+                }
+                Console.WriteLine(grid);
+                Console.WriteLine(snakeLength - 1);
+            }
         }
 
         static void GameLogic(int counter)
